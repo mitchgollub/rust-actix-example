@@ -17,5 +17,3 @@ tracing = "0.1"
 tracing-futures = "0.2.5"
 tracing-log = { version = "0.1.2", features =["env_logger"] }
 tracing-subscriber = "0.2.18"
-dynamodb = { git = "https://github.com/awslabs/aws-sdk-rust", tag = "v0.0.4-alpha", package = "aws-sdk-dynamodb" }
-tokio = { version = "1", features = ["full"] }
