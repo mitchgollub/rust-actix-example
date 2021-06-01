@@ -1,12 +1,19 @@
+use crate::repositories::MoviesRepository;
 use actix_web::HttpResponse;
-use actix_web::{web, web::ServiceConfig};
-
-pub fn app_config(config: &mut ServiceConfig) {
-    let health_check = web::resource("/").route(web::get().to(health));
-
-    config.service(health_check);
-}
+use actix_web::{error, get, web, Result};
 
 pub async fn health() -> HttpResponse {
     HttpResponse::Ok().finish()
+}
+
+#[get("/score/{movie_name}")]
+pub async fn score(
+    movies_repo: web::Data<MoviesRepository>,
+    web::Path(movie_name): web::Path<String>,
+) -> Result<HttpResponse> {
+    let resp = movies_repo.get(movie_name);
+    match resp {
+        Ok(movie) => Ok(HttpResponse::Ok().json(movie)),
+        Err(e) => Err(error::ErrorInternalServerError(e)),
+    }
 }
