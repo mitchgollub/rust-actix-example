@@ -1,7 +1,8 @@
-use crate::repositories::MoviesRepository;
+use super::repositories::MoviesRepository;
 use actix_web::HttpResponse;
 use actix_web::{error, get, web, Result};
 
+#[get("health")]
 pub async fn health() -> HttpResponse {
     HttpResponse::Ok().finish()
 }

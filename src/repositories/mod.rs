@@ -1,4 +1,4 @@
-use crate::config::Config;
+use super::config::Config;
 use eyre::Error;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -8,6 +8,9 @@ use tracing::info;
 pub struct Movie {
     #[serde(rename(deserialize = "title"))]
     pub movie_name: String,
+    pub request: String,
+    pub poster: String,
+    pub score: String,
 }
 
 pub struct MoviesRepository {
@@ -33,7 +36,7 @@ impl MoviesRepository {
             .json::<Movie>()
             .await?;
 
-        info!("Response: {:?}", response);
+        info!("Response: {:?}", &response);
 
         Ok(response)
     }

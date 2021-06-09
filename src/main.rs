@@ -18,7 +18,7 @@ async fn main() -> Result<()> {
         App::new()
             .wrap(Logger::default())
             .data(MoviesRepository::new(&config))
-            .service(web::resource("/").route(web::get().to(health)))
+            .service(health)
             .service(web::scope("/movies").service(score))
     })
     .bind(server_url)?
