@@ -20,6 +20,7 @@ async fn main() -> Result<()> {
             .data(MoviesRepository::new(&config))
             .service(health)
             .service(web::scope("/movies").service(score))
+            .service(actix_files::Files::new("/", &config.static_files).index_file("index.html"))
     })
     .bind(server_url)?
     .run()

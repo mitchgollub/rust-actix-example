@@ -10,6 +10,7 @@ pub struct Config {
     pub host: String,
     pub port: u16,
     pub movies_url: String,
+    pub static_files: String,
 }
 
 impl Config {
